@@ -59,7 +59,7 @@ export const Avatar = ({ text, textId, image, size, className, style }) => {
 Avatar.propTypes = {
   text: PropTypes.string,
   image: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'medium']),
+  size: PropTypes.oneOf(['small', 'small-plus', 'medium']),
   className: PropTypes.string
 }
 
