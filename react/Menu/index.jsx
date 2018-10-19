@@ -6,6 +6,22 @@ import MenuButton from './Button'
 import PropTypes from 'prop-types'
 import { Media, Bd, Img } from '../Media'
 import Popover from '../Popover'
+
+const MenuItemImg = ({ icon }) => {
+  return (
+    <Img className={styles['c-menu__item-icon']}>{icon}</Img>
+  )
+}
+
+const MenuItemLegend = ({ children, className, style }) => {
+  return (
+    <div className={cx(styles['c-menu__item-legend'], className)}>
+      { children }
+    </div>
+  )
+}
+
+
 class MenuItem extends Component {
   render() {
     const { disabled, className, children, icon, ...props } = this.props
@@ -24,7 +40,7 @@ class MenuItem extends Component {
           children
         ) : (
           <Media>
-            <Img className={styles['c-menu__item-icon']}>{icon}</Img>
+            <MenuItemImg icon={icon} />
             <Bd>{children}</Bd>
           </Media>
         )}
@@ -170,4 +186,4 @@ Menu.MenuItem = MenuItem
 Menu.MenuButton = MenuButton
 export default Menu
 
-export { MenuItem, MenuButton }
+export { MenuItem, MenuButton, MenuItemImg, MenuItemLegend }

@@ -47,3 +47,32 @@ const { Button } = require('../Button');
   <MenuItem data='hola'>¡Hola!</MenuItem>
 </Menu>
 ```
+
+`MenuItemLegend` and `MenuItemImg` are exported for you to build custom menu items.
+
+```
+const { Media, Bd, Img } = require('../Media')
+const { MenuItemImg, MenuItem, MenuItemLegend } = require('.')
+const Icon = require('../Icon').default;
+
+const CustomMenuItem = ({ icon, legend, text, ...rest }) => {
+  return (
+    <MenuItem {...rest}>
+      <Media align='top'>
+        <MenuItemImg icon={<Icon icon={ icon } />} />
+        <Bd>
+          <div>{ text }</div>
+          <MenuItemLegend>
+            { legend }
+          </MenuItemLegend>
+        </Bd>
+      </Media>
+    </MenuItem>
+  )
+}
+
+<Menu text='Click Me !'>
+  <CustomMenuItem onSelect={() => alert('Do not touch anything !')} icon='back' text='Go back' legend='in time...' />
+  <CustomMenuItem onSelect={() => alert('Don\'t forget your almanac')} icon='forward' text='Go back' legend='to the future...' />
+</Menu>
+```
