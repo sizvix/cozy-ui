@@ -7,20 +7,21 @@ import PropTypes from 'prop-types'
 import { Media, Bd, Img } from '../Media'
 import Popover from '../Popover'
 
-const MenuItemImg = ({ icon }) => {
+const MenuItemImg = ({ icon, style, className }) => {
   return (
-    <Img className={styles['c-menu__item-icon']}>{icon}</Img>
+    <Img className={cx(styles['c-menu__item-icon'], className)} style={style}>
+      {icon}
+    </Img>
   )
 }
 
 const MenuItemLegend = ({ children, className, style }) => {
   return (
-    <div className={cx(styles['c-menu__item-legend'], className)}>
-      { children }
+    <div className={cx(styles['c-menu__item-legend'], className)} style={style}>
+      {children}
     </div>
   )
 }
-
 
 class MenuItem extends Component {
   render() {
