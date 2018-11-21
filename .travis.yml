@@ -9,6 +9,7 @@ cache:
   - node_modules
 script:
 - yarn lint
+- yarn release
 - yarn test
 - yarn build:css
 after_success:
