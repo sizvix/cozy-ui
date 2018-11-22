@@ -101,7 +101,7 @@
     "node-polyglot": "^2.2.2",
     "normalize.css": "^7.0.0",
     "react-hot-loader": "^4.3.11",
-    "react-select": "2.1.1"
+    "react-select": "2.1.2"
   },
   "peerDependencies": {
     "piwik-react-router": "^0.8.2"
