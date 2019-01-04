@@ -1,15 +1,58 @@
 import React from 'react'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
+
 import styles from './styles.styl'
 import Label from '../Label'
+import { default as LabelStyles } from '../Label/styles.styl'
 import Input from '../Input'
 import Textarea from '../Textarea'
+
+class InputPassword extends React.Component {
+  state = {
+    visible: false
+  }
+
+  toggleVisibility() {
+    this.setState({ visible: !this.state.visible })
+  }
+  render() {
+    const { hideLabel, showLabel } = this.props
+    return (
+      <div className={styles['wrap-input-password']}>
+        {this.props.showVisibilityButton && (
+          <div
+            className={cx(LabelStyles['c-label'], styles['action-on-input'])}
+            onClick={() => this.toggleVisibility()}
+          >
+            {this.state.visible ? hideLabel : showLabel}
+          </div>
+        )}
+        <Input
+          {...this.props}
+          type={this.state.visible ? 'text' : 'password'}
+        />
+      </div>
+    )
+  }
+}
+
+InputPassword.propTypes = {
+  hideLabel: PropTypes.string,
+  showLabel: PropTypes.string,
+  showVisibilityButton: PropTypes.bool
+}
+InputPassword.defaultProps = {
+  hideLabel: '',
+  showLabel: '',
+  showVisibilityButton: true
+}
 
 const Field = props => {
   const {
     className,
     label,
+    secondaryLabels,
     id,
     type,
     value,
@@ -32,10 +75,22 @@ const Field = props => {
             readOnly={readOnly}
           />
         )
-      case 'text':
       case 'password':
+        return (
+          <InputPassword
+            id={id}
+            type={type}
+            placeholder={placeholder}
+            value={value}
+            error={error}
+            onChange={onChange}
+            readOnly={readOnly}
+            {...secondaryLabels}
+          />
+        )
       case 'email':
       case 'url':
+      case 'text':
         return (
           <Input
             id={id}
@@ -68,7 +123,8 @@ Field.propTypes = {
   type: PropTypes.oneOf(['text', 'password', 'email', 'url', 'textarea']),
   value: PropTypes.string,
   placeholder: PropTypes.string,
-  error: PropTypes.bool
+  error: PropTypes.bool,
+  secondaryLabels: PropTypes.object
 }
 
 Field.defaultProps = {
@@ -77,7 +133,8 @@ Field.defaultProps = {
   type: 'text',
   value: '',
   placeholder: '',
-  error: false
+  error: false,
+  secondaryLabels: {}
 }
 
 export default Field
